@@ -922,15 +922,6 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                         info="⚠️ 制限: PNG形式のみ対応 | 参照画像生成では利用不可"
                     )
                     
-                    # 対話型編集の制限事項表示
-                    gr.HTML("""
-                    <div style="background:#fff3cd;border:1px solid #ffeaa7;border-radius:6px;padding:12px;margin:8px 0;">
-                        <strong>🔔 対話型編集の制限事項</strong><br>
-                        • <strong style="color:#e74c3c;">PNG形式のみ対応</strong> - JPEG/WebP選択時は通常生成にフォールバック<br>
-                        • <strong style="color:#e74c3c;">参照画像生成では利用不可</strong> - ImageEdit APIは対話型未対応<br>
-                        • <strong style="color:#27ae60;">プロンプト直接・AIチャットタブでのみ利用可能</strong>
-                    </div>
-                    """)
                 
                 # タブ
                 with gr.Tabs():
@@ -951,13 +942,6 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                         **例**: 犬の写真 + 「猫が帽子をかぶっている」 → 犬の写真のスタイルで猫が帽子をかぶった画像
                         """)
                         
-                        gr.HTML("""
-                        <div style="background:#f8d7da;border:1px solid #f5c6cb;border-radius:6px;padding:10px;margin:8px 0;">
-                            <strong>⚠️ 重要な制限</strong><br>
-                            <strong style="color:#721c24;">画像参照生成では対話型編集は利用できません</strong><br>
-                            対話型編集をお使いになりたい場合は「プロンプト直接」または「AIチャット」タブをご利用ください。
-                        </div>
-                        """)
                         
                         reference_image = gr.Image(
                             label="参照画像",
@@ -1038,13 +1022,6 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                     - **コンテキスト保持**: 前回の生成内容を覚えて改善
                     - **インタラクティブ**: 細かい調整や追加要求が可能
                     
-                    <div style="background:#f1f3f4;border-left:4px solid #e74c3c;padding:12px;margin:12px 0;">
-                        <strong>📋 利用可能条件</strong><br>
-                        ✅ 「💬 対話型有効」をチェック済み<br>
-                        ✅ PNG形式で生成<br>
-                        ✅ プロンプト直接・AIチャットタブで生成<br>
-                        ❌ 画像参照生成・JPEG/WebP形式では利用不可
-                    </div>
                     """)
                     
                     interactive_prompt = gr.Textbox(
