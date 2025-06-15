@@ -1,0 +1,99 @@
+# -------------------------------
+# 全体設定
+# -------------------------------
+style: "飲食店アルバイト募集ポスター風"
+theme_color: "イエロー, ブラック, ホワイト"
+aspect_ratio: "2:3"
+resolution: "1024x1536"
+mood: "明るい, 元気, カジュアル, 働きやすそう"
+typographer_agent: true
+
+# セーフゾーン（上下 160px / 左右 128px）
+safe_zone: {top: 160, bottom: 160, left: 128, right: 128}
+padding:   "160px 128px 160px 128px"
+
+# -------------------------------
+# 背景設定
+# -------------------------------
+background:
+  type: "ビビッドイエロー単色"
+  color: "#ffec00"
+  overlay: "左に料理を持つスタッフの人物写真（架空）"
+  effect: "右側に文字が入るように構図を調整"
+
+# -------------------------------
+# 人物設定
+# -------------------------------
+person:
+  type: "架空の女性スタッフ"
+  description: "飲食ユニフォーム姿で笑顔・両手に料理皿を持ち、正面を向いている"
+  expression: "笑顔、自然体"
+  clothing: "ベージュのコックシャツ＋名札"
+  position: "left-center"
+  lighting: "スタジオ照明＋影落ち調整"
+  outline: "背景から自然に浮かび上がる白フチ風"
+
+# -------------------------------
+# 見出し・キャッチ
+# -------------------------------
+main_texts:
+  - id: "catch_top"
+    content: "ホールスタッフ・調理補助"
+    font_style: "bold"
+    font_size: "medium"
+    font_color: "#ffffff"
+    background_color: "#000000"
+    padding: "6px 12px"
+    position: "top-left"
+    offset: {x: 40, y: 40}
+
+  - id: "bubble_text"
+    content: "未経験者歓迎！"
+    font_style: "bold"
+    font_size: "medium"
+    font_color: "#000000"
+    background_shape: "ふきだし"
+    background_color: "#ffffff"
+    position: "top-right"
+    offset: {x: -60, y: 60}
+
+  - id: "main_title"
+    content: "アルバイト\n募集中！"
+    font_style: "bold"
+    font_size: "xx-large"
+    font_color: "#000000"
+    position: "center-right"
+    offset: {x: -80, y: 300}
+    line_spacing: 1.3
+
+  - id: "handwritten"
+    content: "一緒に楽しく働いてくれる方、大歓迎です！"
+    font_style: "handwriting"
+    font_size: "small"
+    font_color: "#ff69b4"
+    rotation: -25
+    position: "left-center"
+    offset: {x: 120, y: 480}
+
+# -------------------------------
+# 募集情報
+# -------------------------------
+job_info:
+  company: "ひなた食堂"
+  position: "ホール・キッチン補助"
+  hourly_wage: "時給 1,100円〜（昇給あり）"
+  description: |
+    ◎ 週2日〜・1日3時間〜OK！  
+    ◎ 学生さん・主婦（夫）・Wワーク歓迎  
+    ◎ 賄い付き・髪色自由・履歴書不要！
+
+# -------------------------------
+# お問い合わせ
+# -------------------------------
+contact_box:
+  tel: "0120-00-5678"
+  text: "まずはお気軽にお電話ください"
+  position: "bottom"
+  background_color: "#000000"
+  font_color: "#ffffff"
+  padding: "12px 0"

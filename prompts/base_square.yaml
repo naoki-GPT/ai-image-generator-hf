@@ -1,0 +1,165 @@
+# -------------------------------
+# 拡張型自動推論メタプロンプト（正方形）
+# -------------------------------
+# AIが文脈から最適な値を自動推論します
+style: "{AUTO_STYLE: ユーザーの用途から自動判定 - Instagram→モダンでおしゃれ, 広告→訴求力重視, アイコン→シンプルで視認性高}"
+theme_color: "{AUTO_COLORS: 用途とムードから自動選択 - 美容→ピンク/ホワイト, テック→青/黒, 食品→暖色系}"
+aspect_ratio: "1:1"
+resolution: "1024x1024"
+quality: "{AUTO_QUALITY: high/very-high - 用途に応じて最適化}"
+mood: "{AUTO_MOOD: コンテキストから推論 - 楽しい/真面目/クリエイティブ/プロフェッショナル/親しみやすい}"
+typographer_agent: true
+padding: "{AUTO_PADDING: 60px-100px - コンテンツ量に応じて調整}"
+
+# 見切れ防止用セーフゾーン（固定値）
+safe_zone: {top: 100, bottom: 100, left: 100, right: 100}
+
+# -------------------------------
+# 背景設定（自動推論）
+# -------------------------------
+background:
+  type: "{AUTO_BG_TYPE: solid/gradient/pattern/photo/自然光＋室内 - 用途から最適なタイプを選択}"
+  color: "{AUTO_BG_COLOR: メインカラーと調和する背景色を自動生成}"
+  pattern: "{AUTO_PATTERN: 用途に応じた適切なパターンやテクスチャ}"
+  effect: "{AUTO_BG_EFFECT: ぼかし/グロー/影/発光処理等の特殊効果}"
+  overlay_text: 
+    content: "{AUTO_WATERMARK: 必要に応じてブランド名や透かしを追加}"
+    font_style: "{AUTO_WATERMARK_STYLE}"
+    font_color: "{AUTO_WATERMARK_COLOR: 薄い透明度で背景に溶け込む色}"
+    opacity: 0.1
+    position: "center"
+    rotation: "{AUTO_ROTATION: -45 to 45}"
+
+# -------------------------------
+# モデル/人物構成（条件付き）
+# -------------------------------
+main_person:
+  type: "{AUTO_PERSON_TYPE: 女性/男性/子供/グループ/なし}"
+  description: "{AUTO_PERSON_DESC: 年齢、表情、服装、ポーズの詳細な記述}"
+  pose: "{AUTO_POSE: 自然なポーズ/アクション/座り/立ち}"
+  outfit: "{AUTO_OUTFIT: カジュアル/ビジネス/スポーツ/特定の服装}"
+  lighting: "{AUTO_LIGHTING: 自然光/スタジオ照明/逆光/やわらかい光}"
+  position: "{AUTO_PERSON_POS: center/right/left/diagonal}"
+  scale: "{AUTO_PERSON_SCALE: 70%-100% - バランスを考慮}"
+  effect: "{AUTO_PERSON_EFFECT: 発光/影/風のエフェクト等}"
+
+# -------------------------------
+# メインテキスト（AIが内容生成）
+# -------------------------------
+main_texts:
+  - id: "primary_message"
+    content: "{AUTO_MAIN_TEXT: ユーザー入力から最もインパクトのあるメッセージを生成}"
+    font_style: "{AUTO_FONT_PRIMARY: bold/medium/light/handwritten/gothic - メッセージの重要度に応じて}"
+    font_color: "{AUTO_TEXT_COLOR: 背景とのコントラストを考慮}"
+    font_outline: "{AUTO_OUTLINE: 必要に応じて縁取りを追加}"
+    font_size: "{AUTO_SIZE_PRIMARY: medium/large/x-large/xx-large/xxx-large - 画面占有率を考慮}"
+    align: "{AUTO_ALIGN: center/left/right - レイアウトバランスを考慮}"
+    position: "{AUTO_POS_PRIMARY: 最適な配置を自動計算}"
+    offset: {x: "{AUTO_OFFSET_X: -200 to 200}", y: "{AUTO_OFFSET_Y: -200 to 200}"}
+    line_spacing: "{AUTO_LINE_SPACE: 0.8-1.5}"
+    rotation: "{AUTO_TEXT_ROTATION: -30 to 30 度}"
+
+  - id: "secondary_message"
+    content: "{AUTO_SUB_TEXT: メインを補完するサブメッセージを自動生成}"
+    font_style: "{AUTO_FONT_SECONDARY: メインより軽いウェイト}"
+    font_color: "{AUTO_SUB_COLOR: メインより控えめな色}"
+    font_size: "{AUTO_SIZE_SECONDARY: メインより小さめ}"
+    align: "{AUTO_ALIGN_SUB}"
+    position: "{AUTO_POS_SECONDARY}"
+    offset: {x: "{AUTO_SUB_OFFSET_X}", y: "{AUTO_SUB_OFFSET_Y}"}
+
+# -------------------------------
+# グラフィック要素（条件付き）
+# -------------------------------
+graphic_objects:
+  - type: "{AUTO_GRAPHIC_TYPE: 丸バナー/四角バナー/吹き出し/矢印/バースト}"
+    description: "{AUTO_GRAPHIC_DESC: グラフィック要素の詳細}"
+    text: "{AUTO_GRAPHIC_TEXT: 初回限定/NEW/SALE等}"
+    font_style: "{AUTO_GRAPHIC_FONT}"
+    font_color: "{AUTO_GRAPHIC_FONT_COLOR}"
+    background_color: "{AUTO_GRAPHIC_BG}"
+    position: "{AUTO_GRAPHIC_POS}"
+    scale: "{AUTO_GRAPHIC_SCALE: 40%-100%}"
+    border_radius: "{AUTO_RADIUS: 0-20px}"
+
+# -------------------------------
+# 強調バッジ（条件付き自動生成）
+# -------------------------------
+badge:
+  content: "{AUTO_BADGE: NEW/限定/人気No.1/おすすめ等を文脈から判断}"
+  font_style: "bold"
+  font_color: "{AUTO_BADGE_TEXT_COLOR}"
+  background_shape: "{AUTO_BADGE_SHAPE: 円/四角/リボン/バースト}"
+  background_color: "{AUTO_BADGE_BG_COLOR: 目立つアクセントカラー}"
+  font_size: "small"
+  position: "{AUTO_BADGE_POS: top-left/top-right/bottom-left/bottom-right}"
+  padding: "10px"
+
+# -------------------------------
+# 写真素材（条件付き）
+# -------------------------------
+photo:
+  type: "{AUTO_PHOTO_TYPE: 人物/商品/風景/抽象 - 用途から自動判断}"
+  description: "{AUTO_PHOTO_DESC: 具体的な写真の内容を自動生成}"
+  position: "{AUTO_PHOTO_POS: 最適な配置を自動計算}"
+  style: "{AUTO_PHOTO_STYLE: 自然光/スタジオ/アート風等}"
+
+# -------------------------------
+# キャラクター（条件付き）
+# -------------------------------
+character:
+  type: "{AUTO_CHAR_TYPE: 必要に応じてキャラクターを追加}"
+  gender: "{AUTO_GENDER: 文脈から適切に選択}"
+  expression: "{AUTO_EXPRESSION: 笑顔/真剣/驚き等}"
+  clothing: "{AUTO_CLOTHING: カジュアル/ビジネス/ユニフォーム等}"
+  position: "{AUTO_CHAR_POS}"
+  size: "{AUTO_CHAR_SIZE}"
+
+# -------------------------------
+# アイコン・ロゴ（条件付き）
+# -------------------------------
+icons:
+  - id: "platform_icon"
+    type: "{AUTO_ICON_TYPE: SNS/アプリ/ブランドロゴ等}"
+    name: "{AUTO_ICON_NAME: Instagram/YouTube/会社ロゴ等}"
+    position: "{AUTO_ICON_POS}"
+    size: "{AUTO_ICON_SIZE}"
+
+# -------------------------------
+# ブランドロゴ（条件付き）
+# -------------------------------
+brand_logo:
+  text: "{AUTO_BRAND_NAME: ブランド名を自動設定}"
+  font_style: "{AUTO_LOGO_STYLE: stencil/sans-serif/serif等}"
+  font_color: "{AUTO_LOGO_COLOR}"
+  font_size: "{AUTO_LOGO_SIZE}"
+  position: "{AUTO_LOGO_POS}"
+  background_color: "{AUTO_LOGO_BG: 必要に応じて背景色}"
+  padding: "{AUTO_LOGO_PADDING}"
+  border_radius: "{AUTO_LOGO_RADIUS}"
+
+# -------------------------------
+# CTA（Call-to-Action）バナー
+# -------------------------------
+cta_banner:
+  text_top: "{AUTO_CTA_TOP: 行動を促す上部テキスト}"
+  text_bottom: "{AUTO_CTA_BOTTOM: 具体的なアクション}"
+  font_style_top: "medium"
+  font_style_bottom: "bold"
+  font_color_top: "{AUTO_CTA_COLOR_TOP}"
+  font_color_bottom: "{AUTO_CTA_COLOR_BOTTOM}"
+  background_color: "{AUTO_CTA_BG: アクセントカラー}"
+  button_icon: "{AUTO_CTA_ICON: 矢印/クリック/タップ等}"
+  position: "bottom"
+  padding: "20px"
+
+# -------------------------------
+# サブテキスト/詳細情報
+# -------------------------------
+sub_text:
+  content: "{AUTO_DETAIL_TEXT: 商品名/サービス名/詳細情報}"
+  font_style: "{AUTO_DETAIL_STYLE}"
+  font_size: "{AUTO_DETAIL_SIZE}"
+  font_color: "{AUTO_DETAIL_COLOR}"
+  position: "{AUTO_DETAIL_POS}"
+  offset: {x: "{AUTO_DETAIL_OFFSET_X}", y: "{AUTO_DETAIL_OFFSET_Y}"}

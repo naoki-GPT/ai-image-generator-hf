@@ -1,0 +1,109 @@
+# -------------------------------
+# 全体設定
+# -------------------------------
+style: "YouTubeサムネイル（デザイン講座・初心者向け）"
+theme_color: "水色, 黄, 白, 黒"
+aspect_ratio: "3:2"
+resolution: "1536x1024"
+mood: "親しみやすさ, やさしさ, 実践感"
+typographer_agent: true
+
+# セーフゾーン（上下 128px / 左右 128px）
+safe_zone: {top: 128, bottom: 128, left: 128, right: 128}
+padding:   "128px 128px 128px 128px"
+
+# -------------------------------
+# ビジュアルアイデンティティ
+# -------------------------------
+visual_identity:
+  typography:
+    headline:
+      font: "Noto Sans JP Bold"
+      size: "64px"
+      color: "#FFFFFF"
+      outline: {color: "#000000", size: "3px"}
+      glow:   {color: "#FFD600", intensity: "中"}
+    subheadline:
+      font: "Noto Sans JP Bold"
+      size: "48px"
+      color: "#000000"
+      outline: {color: "#FFFFFF", size: "2px"}
+    extra:
+      font: "Noto Sans JP Medium"
+      size: "28px"
+      color: "#FFFFFF"
+
+# -------------------------------
+# 背景設定
+# -------------------------------
+background:
+  type: "デザインソフト風UI背景"
+  color: "水色〜白のグラデーション"
+  pattern: "簡易的なUI風"
+  effect: "中心に光が当たるように明るめに加工"
+
+# -------------------------------
+# メインテキスト
+# -------------------------------
+main_texts:
+  - id: "header"
+    content: "初心者さん大歓迎"
+    font_style: "bold"
+    font_size: "large"
+    font_color: "黒"
+    background_color: "黄色"
+    outline_color: "白"
+    position: "center"
+    offset: {x: 0, y: -80}
+    padding: 20
+    shadow: true
+
+  - id: "title"
+    content: "無料でここまで！\nバナー作成術"
+    font_style: "bold"
+    font_size: "x-large"
+    font_color: "白グラデーション"
+    outline_color: "黒"
+    position: "center"
+    offset: {x: 0, y: 40}
+    line_spacing: 15
+    shadow: true
+
+# -------------------------------
+# アイコン
+# -------------------------------
+icons:
+  - id: "app_logo"
+    type: "app"
+    name: "Canva"
+    position: "top-left"
+    size: "large"
+    offset: {x: 40, y: 40}
+
+  - id: "youtube"
+    type: "logo"
+    name: "YouTube"
+    color: "赤＋白"
+    position: "bottom-left"
+    size: "medium"
+    offset: {x: 40, y: -40}
+
+# -------------------------------
+# 人物設定
+# -------------------------------
+character:
+  gender: "女性"
+  expression: "明るく笑顔"
+  hairstyle: "ナチュラルなポニーテール"
+  age_hint: "20s"
+  clothing: "カジュアル"
+  activity: "右手で画面を指差し"
+  skin_texture: "なめらかで光沢のある肌"
+  lighting: "柔らかい自然光"
+  camera_style: "portrait, 50mm, shallow depth of field"
+  position: "right"
+  size: "medium-large"
+  offset: {x: -60, y: 0}
+  effect: "笑顔＋指差し＋柔らかい光で明るく"
+  background_transparency: false
+  padding: 20

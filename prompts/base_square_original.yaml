@@ -1,0 +1,88 @@
+# -------------------------------
+# 全体設定
+# -------------------------------
+style: "フリーランス向けスクールの広告バナー"
+theme_color: "mint green, white, navy"
+aspect_ratio: "1:1"
+resolution: "1024x1024"
+mood: "清潔感, 信頼感, 親しみやすさ"
+typographer_agent: true
+
+# 見切れ防止用セーフゾーン（上下左右 100px）
+safe_zone: {top: 100, bottom: 100, left: 100, right: 100}
+# 外周余白（さらに 100px ずつ）
+padding: "100px 100px 100px 100px"
+
+# -------------------------------
+# 背景設定
+# -------------------------------
+background:
+  type: "solid with angled overlay"
+  color: "ペールミントグリーンとホワイトの斜め切り替え"
+  pattern: "右上から左下への柔らかなトーン変化"
+  overlay_text: 
+    content: "freelance"
+    font_style: "italic script"
+    font_color: "mint green (淡)"
+    opacity: 0.1
+    position: "center"
+    rotation: -10
+
+# -------------------------------
+# メインテキスト
+# -------------------------------
+main_texts:
+  - id: "tagline"
+    content: "WEB制作\n×\n案件獲得特化"
+    font_style: "bold sans-serif"
+    font_color: "#147373"
+    font_outline: "white"
+    font_size: "extra-large"
+    align: "center"
+    line_spacing: 1.2
+    margin_top: "40px"
+
+  - id: "subtext"
+    content: "フリーランススクール"
+    font_style: "medium sans-serif"
+    font_color: "#147373"
+    font_size: "medium"
+    align: "center"
+    margin_top: "8px"
+
+# -------------------------------
+# 強調バッジ（上部）
+# -------------------------------
+badge:
+  content: "収益化率 95.8%"
+  font_style: "bold"
+  font_color: "#1b4f4f"
+  background_shape: "月桂樹リース"
+  background_color: "transparent"
+  font_size: "small"
+  position: "top-left"
+  padding: "10px"
+
+# -------------------------------
+# 写真素材（右側）
+# -------------------------------
+photo:
+  type: "女性"
+  description: "20代の日本人女性。レースの白トップス。柔らかな笑顔で前向きな印象。"
+  position: "right-center"
+  style: "自然光で撮影された明るく清潔なポートレート"
+
+# -------------------------------
+# フッター（下部バナー）
+# -------------------------------
+cta_banner:
+  text_top: "＼ フリーランスキャリアプランプレゼント ／"
+  text_bottom: "今すぐ無料カウンセリングに申し込む"
+  font_style_top: "medium"
+  font_style_bottom: "bold"
+  font_color_top: "#147373"
+  font_color_bottom: "white"
+  background_color: "#147373"
+  button_icon: "矢印（右向き）"
+  position: "bottom"
+  padding: "20px"

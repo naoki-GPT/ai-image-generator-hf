@@ -1,0 +1,185 @@
+# -------------------------------
+# 拡張型自動推論メタプロンプト（縦長）
+# -------------------------------
+# ポスター/ストーリー/モバイル広告等に最適化
+style: "{AUTO_STYLE: ポスター→インパクト重視, スポーツ→爆発力, ストーリー→親密感, モバイル広告→クリック誘導}"
+theme_color: "{AUTO_COLORS: スポーツ→ビビッドレッド/蛍光ピンク/イエロー, イベント→華やか, SNS→トレンドカラー}"
+aspect_ratio: "2:3"
+resolution: "1024x1536"
+quality: "{AUTO_QUALITY: very-high - 縦長は特に高品質推奨}"
+mood: "{AUTO_MOOD: イベント→ワクワク感, スポーツ→限界突破, 募集→親しみやすさ, 広告→信頼感}"
+typographer_agent: true
+padding: "{AUTO_PADDING: 60px-160px - 縦長は上下余白重要}"
+
+# セーフゾーン（固定値 - 縦長用に最適化）
+safe_zone: {top: 160, bottom: 160, left: 128, right: 128}
+
+# -------------------------------
+# 背景設定（縦長最適化）
+# -------------------------------
+background:
+  type: "{AUTO_BG_TYPE: ポスター→写真ベース, スポーツ→ペイント＋スプラッシュ, ストーリー→グラデーション}"
+  color: "{AUTO_BG_COLOR: 用途に応じた最適な背景色}"
+  pattern: "{AUTO_PATTERN: スプラッシュ/ブラッシュストローク/放射状}"
+  overlay: "{AUTO_OVERLAY: 必要に応じて半透明オーバーレイ}"
+  effect: "{AUTO_BG_EFFECT: ぼかし/グラデーション/パターン/破裂的インパクト}"
+
+# -------------------------------
+# 人物設定（メインビジュアル）
+# -------------------------------
+person:
+  type: "{AUTO_PERSON_TYPE: モデル/アスリート/スタッフ/キャラクター}"
+  description: "{AUTO_PERSON_DESC: 具体的な人物描写（スポーツウェア/疾走ポーズ等）}"
+  expression: "{AUTO_PERSON_EXPR: 笑顔/真剣/自然体}"
+  clothing: "{AUTO_PERSON_CLOTH: 用途に適した服装}"
+  position: "{AUTO_PERSON_POS: 中央/上部/下部/diagonal-center}"
+  scale: "{AUTO_PERSON_SCALE: 90%-98% - 縦長は大きめ推奨}"
+  lighting: "{AUTO_PERSON_LIGHT: スタジオ/自然光/グロー光}"
+  outline: "{AUTO_PERSON_OUTLINE: 背景から浮き出る処理}"
+  effect: "{AUTO_PERSON_EFFECT: 粒子/風のエフェクト/光の反射}"
+
+# -------------------------------
+# 見出し・キャッチコピー
+# -------------------------------
+main_texts:
+  - id: "headline"
+    content: "{AUTO_HEADLINE: 最も目立つメインメッセージ}"
+    font_style: "{AUTO_HEADLINE_STYLE: bold/spray-paint bold/gothic bold}"
+    font_size: "{AUTO_HEADLINE_SIZE: large/x-large/xx-large/xxx-large}"
+    font_color: "{AUTO_HEADLINE_COLOR}"
+    background_color: "{AUTO_HEADLINE_BG: 必要に応じて背景}"
+    padding: "{AUTO_HEADLINE_PAD}"
+    position: "{AUTO_HEADLINE_POS: top/center/bottom}"
+    offset: {x: "{AUTO_HEADLINE_OFFSET_X}", y: "{AUTO_HEADLINE_OFFSET_Y}"}
+    align: "{AUTO_HEADLINE_ALIGN: center/left/right}"
+    rotation: "{AUTO_HEADLINE_ROTATION: -90deg縦書き等}"
+    line_spacing: "{AUTO_HEADLINE_SPACING: 0.9-1.5}"
+    
+  - id: "subheadline"
+    content: "{AUTO_SUBHEAD: サブメッセージ・補足情報}"
+    font_style: "{AUTO_SUBHEAD_STYLE}"
+    font_size: "{AUTO_SUBHEAD_SIZE}"
+    font_color: "{AUTO_SUBHEAD_COLOR}"
+    position: "{AUTO_SUBHEAD_POS}"
+    offset: {x: "{AUTO_SUBHEAD_OFFSET_X}", y: "{AUTO_SUBHEAD_OFFSET_Y}"}
+    
+  - id: "body_text"
+    content: "{AUTO_BODY: 詳細情報・説明文}"
+    font_style: "{AUTO_BODY_STYLE: regular/light}"
+    font_size: "{AUTO_BODY_SIZE: small/medium}"
+    font_color: "{AUTO_BODY_COLOR}"
+    line_spacing: "{AUTO_BODY_SPACING}"
+    position: "{AUTO_BODY_POS}"
+
+  - id: "handwritten"
+    content: "{AUTO_HANDWRITTEN: 手書き風の親しみやすいメッセージ}"
+    font_style: "handwriting"
+    font_size: "{AUTO_HAND_SIZE}"
+    font_color: "{AUTO_HAND_COLOR: ピンク/赤/青等アクセント}"
+    rotation: "{AUTO_HAND_ROTATION: -30 to 30}"
+    position: "{AUTO_HAND_POS}"
+
+  - id: "tagline_vertical"
+    content: "{AUTO_TAGLINE: BREAK\\nTHE\\nLINE等の縦書きメッセージ}"
+    font_style: "{AUTO_TAGLINE_STYLE: spray-paint bold uppercase}"
+    font_size: "{AUTO_TAGLINE_SIZE: xxx-large}"
+    font_color: "{AUTO_TAGLINE_COLOR: #000000}"
+    align: "center"
+    position: "{AUTO_TAGLINE_POS: left-center}"
+    rotation: "{AUTO_TAGLINE_ROTATION: -90deg}"
+    offset: {x: "{AUTO_TAGLINE_OFFSET_X: -50}", y: "{AUTO_TAGLINE_OFFSET_Y: 0}"}
+    line_spacing: "{AUTO_TAGLINE_SPACING: 0.9}"
+
+# -------------------------------
+# 情報ブロック（募集・イベント用）
+# -------------------------------
+info_block:
+  company: "{AUTO_COMPANY: 会社名/団体名/ブランド名}"
+  position: "{AUTO_POSITION: 募集職種/イベント名}"
+  details: "{AUTO_DETAILS: 時給/日時/場所等の詳細情報}"
+  benefits: "{AUTO_BENEFITS: 特典/メリット/アピールポイント}"
+  
+# -------------------------------
+# サブテキスト（勢いある補足）
+# -------------------------------
+sub_text:
+  content: "{AUTO_SUB_TEXT: 速さなんて誰かと比べるものじゃない等のメッセージ}"
+  font_style: "{AUTO_SUB_STYLE: gothic bold}"
+  font_size: "{AUTO_SUB_SIZE: medium}"
+  font_color: "{AUTO_SUB_COLOR: #222222}"
+  position: "{AUTO_SUB_POS: bottom-left}"
+  offset: {x: "{AUTO_SUB_OFFSET_X}", y: "{AUTO_SUB_OFFSET_Y}"}
+
+# -------------------------------
+# バッジ・装飾要素
+# -------------------------------
+badges:
+  - id: "attention_badge"
+    content: "{AUTO_BADGE_TEXT: NEW/限定/急募/人気}"
+    shape: "{AUTO_BADGE_SHAPE: 円/四角/吹き出し/リボン}"
+    color: "{AUTO_BADGE_COLOR}"
+    position: "{AUTO_BADGE_POS}"
+    
+  - id: "feature_badge"
+    content: "{AUTO_FEATURE: 特徴を示すバッジ}"
+    style: "{AUTO_FEATURE_STYLE}"
+    position: "{AUTO_FEATURE_POS}"
+
+# -------------------------------
+# グラフィック要素（縦長向け）
+# -------------------------------
+graphic_objects:
+  - type: "{AUTO_GRAPHIC_TYPE: 丸バナー/価格表示/装飾}"
+    description: "{AUTO_GRAPHIC_DESC: ピンクの円形バッジ等}"
+    text: "{AUTO_GRAPHIC_TEXT: 初回限定/6,000円(税込)等}"
+    font_style: "{AUTO_GRAPHIC_FONT: gothic bold}"
+    font_color: "{AUTO_GRAPHIC_FONT_COLOR: #FFFFFF}"
+    background_color: "{AUTO_GRAPHIC_BG: #FF5599}"
+    position: "{AUTO_GRAPHIC_POS: bottom-left/bottom-center}"
+    scale: "{AUTO_GRAPHIC_SCALE: 60%-100%}"
+
+# -------------------------------
+# お問い合わせ・CTA
+# -------------------------------
+contact_box:
+  tel: "{AUTO_TEL: 電話番号（必要に応じて）}"
+  email: "{AUTO_EMAIL: メールアドレス}"
+  website: "{AUTO_URL: ウェブサイト}"
+  qr_code: "{AUTO_QR: QRコード有無}"
+  text: "{AUTO_CONTACT_TEXT: お問い合わせを促すテキスト}"
+  position: "{AUTO_CONTACT_POS: bottom}"
+  background_color: "{AUTO_CONTACT_BG: #000000}"
+  font_color: "{AUTO_CONTACT_COLOR: #FFFFFF}"
+  padding: "{AUTO_CONTACT_PAD: 12px 0}"
+
+# -------------------------------
+# ブランドロゴ（派手演出あり）
+# -------------------------------
+brand_logo:
+  text: "{AUTO_BRAND_NAME: VELOCIA等のブランド名}"
+  font_style: "{AUTO_LOGO_STYLE: stencil bold italic}"
+  font_color: "{AUTO_LOGO_COLOR: #FFFFFF}"
+  font_size: "{AUTO_LOGO_SIZE: x-large}"
+  position: "{AUTO_LOGO_POS: top-center}"
+  background_color: "{AUTO_LOGO_BG: #FF0055}"
+  padding: "{AUTO_LOGO_PADDING: 12px 24px}"
+  border_radius: "{AUTO_LOGO_RADIUS: 8px}"
+
+# -------------------------------
+# ソーシャル要素
+# -------------------------------
+social_elements:
+  - type: "{AUTO_SOCIAL_TYPE: Instagram/Twitter/TikTok}"
+    handle: "{AUTO_SOCIAL_HANDLE: @username}"
+    icon: "{AUTO_SOCIAL_ICON}"
+    position: "{AUTO_SOCIAL_POS}"
+    
+# -------------------------------
+# 装飾・グラフィック要素
+# -------------------------------
+graphics:
+  - type: "{AUTO_GRAPHIC_TYPE: 図形/イラスト/パターン}"
+    style: "{AUTO_GRAPHIC_STYLE}"
+    color: "{AUTO_GRAPHIC_COLOR}"
+    position: "{AUTO_GRAPHIC_POS}"
+    opacity: "{AUTO_GRAPHIC_OPACITY}"

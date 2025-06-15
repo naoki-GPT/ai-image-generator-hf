@@ -1,0 +1,169 @@
+# -------------------------------
+# 拡張型自動推論メタプロンプト（横長）
+# -------------------------------
+# YouTube/バナー/ヘッダー等に最適化された横長テンプレート
+style: "{AUTO_STYLE: YouTube→サムネイル風, バナー→広告風, ファッション→自由で自然体, 用途から自動判定}"
+theme_color: "{AUTO_COLORS: YouTube→高コントラスト鮮やか, ファッション→ベージュ/ホワイト/ブルー, 文脈から自動選択}"
+aspect_ratio: "3:2"
+resolution: "1536x1024"
+quality: "{AUTO_QUALITY: very-high推奨 - 横長は高品質必須}"
+mood: "{AUTO_MOOD: エンタメ→明るく楽しい, ファッション→自由/自然体, ビジネス→プロフェッショナル}"
+typographer_agent: true
+padding: "{AUTO_PADDING: 60px-128px - 横長は余白重要}"
+
+# セーフゾーン（固定値 - 横長用に最適化）
+safe_zone: {top: 128, bottom: 128, left: 128, right: 128}
+
+# -------------------------------
+# ビジュアルアイデンティティ（YouTube最適化）
+# -------------------------------
+visual_identity:
+  typography:
+    headline:
+      font: "{AUTO_HEADLINE_FONT: Noto Sans JP Bold/ゴシック体/明朝体/mincho bold}"
+      size: "{AUTO_HEADLINE_SIZE: 64px-96px 視認性重視}"
+      color: "{AUTO_HEADLINE_COLOR: 白or黒+縁取り}"
+      outline: {color: "{AUTO_OUTLINE_COLOR}", size: "{AUTO_OUTLINE_SIZE: 3-5px}"}
+      glow: {color: "{AUTO_GLOW_COLOR: アクセントカラー}", intensity: "{AUTO_GLOW: 中/強}"}
+    subheadline:
+      font: "{AUTO_SUB_FONT: sans-serif uppercase等}"
+      size: "{AUTO_SUB_SIZE: 32px-48px}"
+      color: "{AUTO_SUB_COLOR}"
+      outline: {color: "{AUTO_SUB_OUTLINE}", size: "2px"}
+
+# -------------------------------
+# 背景設定（横長最適化）
+# -------------------------------
+background:
+  type: "{AUTO_BG_TYPE: YouTube→グラデーション/パターン, ファッション→海沿いの都市風景＋空}"
+  color: "{AUTO_BG_COLOR: 明るく目を引く色 or 落ち着いたプロ仕様}"
+  pattern: "{AUTO_PATTERN: 動的/幾何学的/シンプル/空と山}"
+  effect: "{AUTO_EFFECT: 中心スポットライト/グロー効果/影/自然光}"
+
+# -------------------------------
+# モデル/人物構成（横長向け）
+# -------------------------------
+main_person:
+  type: "{AUTO_PERSON_TYPE: 女性/男性/グループ/アスリート}"
+  description: "{AUTO_PERSON_DESC: 20代女性が振り返りながら微笑む等の詳細}"
+  pose: "{AUTO_POSE: 振り返り/指差し/アクション/リラックス}"
+  outfit: "{AUTO_OUTFIT: カジュアル白T/ベージュスカート/スポーツウェア}"
+  lighting: "{AUTO_LIGHTING: 自然光＋逆光/スタジオ照明}"
+  position: "{AUTO_PERSON_POS: right-center/left/center}"
+  scale: "{AUTO_PERSON_SCALE: 90%-100%}"
+  effect: "{AUTO_PERSON_EFFECT: 風で髪がなびく/光の反射}"
+
+# -------------------------------
+# メインテキスト（横長レイアウト）
+# -------------------------------
+main_texts:
+  - id: "header"
+    content: "{AUTO_HEADER: 注目を集める上部テキスト（必要に応じて）}"
+    font_style: "bold"
+    font_size: "{AUTO_HEADER_SIZE}"
+    font_color: "{AUTO_HEADER_COLOR}"
+    background_color: "{AUTO_HEADER_BG: 帯状の背景}"
+    position: "{AUTO_HEADER_POS: top-center/top-left}"
+    offset: {x: "{AUTO_HEADER_OFFSET_X}", y: "{AUTO_HEADER_OFFSET_Y}"}
+    padding: 20
+    shadow: true
+
+  - id: "title"
+    content: "{AUTO_TITLE: メインメッセージ・最も重要な情報}"
+    font_style: "{AUTO_TITLE_STYLE: bold/mincho bold}"
+    font_size: "{AUTO_TITLE_SIZE: x-large/xx-large}"
+    font_color: "{AUTO_TITLE_COLOR: 高コントラスト}"
+    outline_color: "{AUTO_TITLE_OUTLINE}"
+    position: "{AUTO_TITLE_POS: center/left-center/right-center}"
+    offset: {x: "{AUTO_TITLE_OFFSET_X}", y: "{AUTO_TITLE_OFFSET_Y}"}
+    line_spacing: "{AUTO_LINE_SPACING: 1.0-1.5}"
+    shadow: true
+    align: "{AUTO_TITLE_ALIGN: left/center/right}"
+
+  - id: "subtitle"
+    content: "{AUTO_SUBTITLE: 補足情報・サブメッセージ}"
+    font_style: "{AUTO_SUBTITLE_STYLE: sans-serif uppercase等}"
+    font_size: "{AUTO_SUBTITLE_SIZE}"
+    font_color: "{AUTO_SUBTITLE_COLOR}"
+    position: "{AUTO_SUBTITLE_POS}"
+    offset: {x: "{AUTO_SUBTITLE_OFFSET_X: 0}", y: "{AUTO_SUBTITLE_OFFSET_Y: 80}"}
+    align: "{AUTO_SUBTITLE_ALIGN}"
+
+# -------------------------------
+# アイコン（プラットフォーム別）
+# -------------------------------
+icons:
+  - id: "platform_logo"
+    type: "{AUTO_PLATFORM_TYPE: YouTube/Twitter/Web等}"
+    name: "{AUTO_PLATFORM_NAME}"
+    position: "{AUTO_PLATFORM_POS: 角に配置}"
+    size: "{AUTO_PLATFORM_SIZE}"
+    color: "{AUTO_PLATFORM_COLOR: 赤＋白等}"
+
+  - id: "channel_icon"
+    type: "{AUTO_CHANNEL_TYPE: チャンネルロゴ/ブランドロゴ}"
+    position: "{AUTO_CHANNEL_POS}"
+    size: "{AUTO_CHANNEL_SIZE}"
+
+# -------------------------------
+# 人物設定（YouTube向け）
+# -------------------------------
+character:
+  gender: "{AUTO_GENDER: ターゲット層から推測}"
+  expression: "{AUTO_EXPRESSION: 明るい笑顔/驚き/真剣}"
+  hairstyle: "{AUTO_HAIR: トレンドを反映/ナチュラルなポニーテール}"
+  age_hint: "{AUTO_AGE: 20s/30s/40s等}"
+  clothing: "{AUTO_CLOTHING: カジュアル/ビジネスカジュアル}"
+  activity: "{AUTO_ACTIVITY: 指差し/ジェスチャー/アクション}"
+  skin_texture: "{AUTO_SKIN: なめらか/自然}"
+  lighting: "{AUTO_LIGHTING: スタジオ照明/自然光/柔らかい光}"
+  camera_style: "portrait, 50mm, shallow depth of field"
+  position: "{AUTO_CHAR_POS: right/left/center}"
+  size: "{AUTO_CHAR_SIZE: medium-large/large}"
+  effect: "{AUTO_CHAR_EFFECT: 明るく親しみやすい演出}"
+  background_transparency: false
+  padding: 20
+
+# -------------------------------
+# 装飾要素（条件付き）
+# -------------------------------
+decorations:
+  - type: "{AUTO_DECO_TYPE: 矢印/バースト/フレーム}"
+    content: "{AUTO_DECO_TEXT: NEW/今すぐ/限定等}"
+    position: "{AUTO_DECO_POS}"
+    color: "{AUTO_DECO_COLOR: アクセントカラー}"
+
+# -------------------------------
+# CTA要素（行動喚起）
+# -------------------------------
+cta_elements:
+  - type: "{AUTO_CTA_TYPE: ボタン/テキスト/アイコン}"
+    content: "{AUTO_CTA_CONTENT: チャンネル登録/今すぐ見る/詳細はこちら}"
+    style: "{AUTO_CTA_STYLE: 目立つデザイン}"
+    position: "{AUTO_CTA_POS: bottom-right/center}"
+
+# -------------------------------
+# グラフィック要素（横長向け）
+# -------------------------------
+graphic_objects:
+  - type: "{AUTO_GRAPHIC_TYPE: 吹き出し/バナー/アイコン}"
+    description: "{AUTO_GRAPHIC_DESC}"
+    text: "{AUTO_GRAPHIC_TEXT}"
+    font_style: "{AUTO_GRAPHIC_FONT}"
+    font_color: "{AUTO_GRAPHIC_FONT_COLOR}"
+    background_color: "{AUTO_GRAPHIC_BG}"
+    position: "{AUTO_GRAPHIC_POS}"
+    scale: "{AUTO_GRAPHIC_SCALE: 60%-100%}"
+
+# -------------------------------
+# ブランドロゴ（横長最適化）
+# -------------------------------
+brand_logo:
+  text: "{AUTO_BRAND_NAME: ブランド名/チャンネル名}"
+  font_style: "{AUTO_LOGO_STYLE: stencil bold italic等}"
+  font_color: "{AUTO_LOGO_COLOR}"
+  font_size: "{AUTO_LOGO_SIZE: large/x-large}"
+  position: "{AUTO_LOGO_POS: top-center等}"
+  background_color: "{AUTO_LOGO_BG}"
+  padding: "{AUTO_LOGO_PADDING: 12px 24px}"
+  border_radius: "{AUTO_LOGO_RADIUS: 8px}"
