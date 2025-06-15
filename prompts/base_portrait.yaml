@@ -113,17 +113,7 @@ sub_text:
 # -------------------------------
 # バッジ・装飾要素
 # -------------------------------
-badges:
-  - id: "attention_badge"
-    content: "{AUTO_BADGE_TEXT: NEW/限定/急募/人気}"
-    shape: "{AUTO_BADGE_SHAPE: 円/四角/吹き出し/リボン}"
-    color: "{AUTO_BADGE_COLOR}"
-    position: "{AUTO_BADGE_POS}"
-    
-  - id: "feature_badge"
-    content: "{AUTO_FEATURE: 特徴を示すバッジ}"
-    style: "{AUTO_FEATURE_STYLE}"
-    position: "{AUTO_FEATURE_POS}"
+{{AUTO_BADGE}}
 
 # -------------------------------
 # グラフィック要素（縦長向け）

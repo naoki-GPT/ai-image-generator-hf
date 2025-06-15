@@ -30,21 +30,17 @@ class ResponsesAPI:
                 "type": "image_generation"
             }
             
-            # オプションパラメータの追加
+            # Responses API対応パラメータのみ追加（2025年6月時点）
             if size != "1024x1024":
                 tool_params["size"] = size
             if quality != "auto":
                 tool_params["quality"] = quality
-            if format != "png":
-                tool_params["response_format"] = format
-            if background != "auto":
-                tool_params["background"] = background
-            if output_compression is not None and format in ["jpeg", "webp"]:
-                tool_params["output_compression"] = output_compression
             if moderation != "auto":
                 tool_params["moderation"] = moderation
             if partial_images is not None and stream:
                 tool_params["partial_images"] = partial_images
+            
+            # 以下は未サポートのため削除：response_format, background, output_compression
             
             # APIリクエスト
             if stream:
@@ -156,20 +152,16 @@ class ResponsesAPI:
         try:
             start_time = time.time()
             
-            # ツールパラメータ
+            # ツールパラメータ（Responses API対応パラメータのみ）
             tool_params = {"type": "image_generation"}
+            supported_params = {"size", "quality", "moderation", "partial_images"}
+            
             for key, value in kwargs.items():
                 if value is None:
                     continue
-                if key in {"format", "output_format", "response_format"}:
-                    tool_params["response_format"] = value
-                elif key == "background":
-                    tool_params["background"] = value
-                elif key == "output_compression":
-                    tool_params["output_compression"] = value
-                # それ以外は size / quality / moderation など
-                else:
+                if key in supported_params:
                     tool_params[key] = value
+                # format系、background、output_compressionは未サポートのため無視
             
             response = self.client.responses.create(
                 model=model,
@@ -228,20 +220,16 @@ class ResponsesAPI:
                         "id": img["generation_id"]
                     })
             
-            # ツールパラメータ
+            # ツールパラメータ（Responses API対応パラメータのみ）
             tool_params = {"type": "image_generation"}
+            supported_params = {"size", "quality", "moderation", "partial_images"}
+            
             for key, value in kwargs.items():
                 if value is None:
                     continue
-                if key in {"format", "output_format", "response_format"}:
-                    tool_params["response_format"] = value
-                elif key == "background":
-                    tool_params["background"] = value
-                elif key == "output_compression":
-                    tool_params["output_compression"] = value
-                # それ以外は size / quality / moderation など
-                else:
+                if key in supported_params:
                     tool_params[key] = value
+                # format系、background、output_compressionは未サポートのため無視
             
             response = self.client.responses.create(
                 model=model,

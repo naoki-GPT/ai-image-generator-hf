@@ -735,6 +735,29 @@ def create_optimized_app():
                     yaml_result = yaml_result.split("```")[1].split("```")[0]
                 yaml_result = yaml_result.strip()
             
+            # {{AUTO_BADGE}}プレースホルダーの処理
+            if "{{AUTO_BADGE}}" in yaml_result:
+                # バッジが必要なキーワードをチェック
+                badge_keywords = ["新商品", "新発売", "リリース", "キャンペーン", "限定", "NEW", "期間限定", "特価", "セール", "人気", "おすすめ", "注目"]
+                needs_badge = any(keyword in text_prompt for keyword in badge_keywords)
+                
+                if needs_badge:
+                    # バッジセクションを生成
+                    badge_section = """badge:
+  content: "NEW"
+  font_style: "bold"
+  font_color: "#FFFFFF"
+  background_shape: "circle"
+  background_color: "#FF4444"
+  font_size: "small"
+  position: "top-right"
+  padding: "10px" """
+                else:
+                    # バッジなし（空白）
+                    badge_section = ""
+                
+                yaml_result = yaml_result.replace("{{AUTO_BADGE}}", badge_section)
+            
             return yaml_result
             
         except Exception as e:

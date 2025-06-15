@@ -85,15 +85,7 @@ graphic_objects:
 # -------------------------------
 # 強調バッジ（条件付き自動生成）
 # -------------------------------
-badge:
-  content: "{AUTO_BADGE: NEW/限定/人気No.1/おすすめ等を文脈から判断}"
-  font_style: "bold"
-  font_color: "{AUTO_BADGE_TEXT_COLOR}"
-  background_shape: "{AUTO_BADGE_SHAPE: 円/四角/リボン/バースト}"
-  background_color: "{AUTO_BADGE_BG_COLOR: 目立つアクセントカラー}"
-  font_size: "small"
-  position: "{AUTO_BADGE_POS: top-left/top-right/bottom-left/bottom-right}"
-  padding: "10px"
+{{AUTO_BADGE}}
 
 # -------------------------------
 # 写真素材（条件付き）
