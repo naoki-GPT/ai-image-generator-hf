@@ -923,18 +923,18 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                     )
                     
                     # 対話型編集の制限事項表示
-                    gr.Markdown("""
-                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; padding: 12px; margin: 8px 0;">
+                    gr.HTML("""
+                    <div style="background:#fff3cd;border:1px solid #ffeaa7;border-radius:6px;padding:12px;margin:8px 0;">
                         <strong>🔔 対話型編集の制限事項</strong><br>
-                        • <strong style="color: #e74c3c;">PNG形式のみ対応</strong> - JPEG/WebP選択時は通常生成にフォールバック<br>
-                        • <strong style="color: #e74c3c;">参照画像生成では利用不可</strong> - ImageEdit APIは対話型未対応<br>
-                        • <strong style="color: #27ae60;">プロンプト直接・AIチャットタブでのみ利用可能</strong>
+                        • <strong style="color:#e74c3c;">PNG形式のみ対応</strong> - JPEG/WebP選択時は通常生成にフォールバック<br>
+                        • <strong style="color:#e74c3c;">参照画像生成では利用不可</strong> - ImageEdit APIは対話型未対応<br>
+                        • <strong style="color:#27ae60;">プロンプト直接・AIチャットタブでのみ利用可能</strong>
                     </div>
                     """)
                 
                 # タブ
                 with gr.Tabs():
-                    with gr.Tab("✏️ プロンプト直接"):
+                    with gr.Tab("✏️ プロンプト直接") as tab_direct:
                         prompt = gr.Textbox(
                             label="プロンプト",
                             placeholder="美しい山の夕日、フォトリアリスティック、高品質",
@@ -943,7 +943,7 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                         
                         direct_btn = gr.Button("🚀 画像生成", variant="primary", size="lg")
                     
-                    with gr.Tab("🖼️ 画像参照生成"):
+                    with gr.Tab("🖼️ 画像参照生成") as tab_ref:
                         gr.Markdown("""
                         ### 画像参照生成
                         参照画像をアップロードして、その画像のスタイル・構図・雰囲気を参考に新しい画像を生成します。
@@ -951,10 +951,10 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                         **例**: 犬の写真 + 「猫が帽子をかぶっている」 → 犬の写真のスタイルで猫が帽子をかぶった画像
                         """)
                         
-                        gr.Markdown("""
-                        <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 6px; padding: 10px; margin: 8px 0;">
+                        gr.HTML("""
+                        <div style="background:#f8d7da;border:1px solid #f5c6cb;border-radius:6px;padding:10px;margin:8px 0;">
                             <strong>⚠️ 重要な制限</strong><br>
-                            <strong style="color: #721c24;">画像参照生成では対話型編集は利用できません</strong><br>
+                            <strong style="color:#721c24;">画像参照生成では対話型編集は利用できません</strong><br>
                             対話型編集をお使いになりたい場合は「プロンプト直接」または「AIチャット」タブをご利用ください。
                         </div>
                         """)
@@ -975,7 +975,7 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                         
                         reference_generate_btn = gr.Button("🖼️ 参照画像で生成", variant="primary", size="lg")
                     
-                    with gr.Tab("🤖 AIチャット"):
+                    with gr.Tab("🤖 AIチャット") as tab_ai:
                         gr.Markdown("""
                         ### 🤖 AI画像生成アシスタント
                         対話形式でプロンプトを生成します。段階的にテーマ→ペルソナ→コピーを決めていきます。
@@ -1038,7 +1038,7 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
                     - **コンテキスト保持**: 前回の生成内容を覚えて改善
                     - **インタラクティブ**: 細かい調整や追加要求が可能
                     
-                    <div style="background: #f1f3f4; border-left: 4px solid #e74c3c; padding: 12px; margin: 12px 0;">
+                    <div style="background:#f1f3f4;border-left:4px solid #e74c3c;padding:12px;margin:12px 0;">
                         <strong>📋 利用可能条件</strong><br>
                         ✅ 「💬 対話型有効」をチェック済み<br>
                         ✅ PNG形式で生成<br>
@@ -1286,15 +1286,70 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
             outputs=[interactive_status]
         )
         
-        # フォーマット変更時に圧縮スライダーの表示を切り替え
+        # フォーマット変更時の制御
         def toggle_compression_slider(format_value):
             """JPEG/WebP選択時のみ圧縮スライダーを表示"""
             return gr.update(visible=format_value in ["jpeg", "webp"])
+        
+        def enforce_png_for_responses(format_value):
+            """PNG以外を選んだら対話型有効を自動OFF"""
+            if format_value != "png":
+                return gr.update(
+                    value=False, 
+                    interactive=False,
+                    label="💬 対話型有効（PNG形式のみ対応）",
+                    info="⚠️ JPEG/WebP選択時は対話型編集が無効になります"
+                )
+            return gr.update(
+                interactive=True,
+                label="💬 対話型有効（Responses API使用）",
+                info="⚠️ 制限: PNG形式のみ対応 | 参照画像生成では利用不可"
+            )
         
         format_option.change(
             toggle_compression_slider,
             inputs=[format_option],
             outputs=[compression_slider]
+        )
+        
+        format_option.change(
+            enforce_png_for_responses,
+            inputs=[format_option],
+            outputs=[enable_responses_api]
+        )
+        
+        # タブ選択による対話型有効の制御
+        def disable_responses_for_ref_tab():
+            """参照画像タブ選択時は対話型有効を自動OFF"""
+            return gr.update(
+                value=False,
+                interactive=False,
+                label="💬 対話型有効（参照画像タブでは利用不可）",
+                info="⚠️ 参照画像生成では対話型編集は利用できません"
+            )
+        
+        def enable_responses_for_other_tabs():
+            """他のタブ選択時は対話型有効を復活"""
+            return gr.update(
+                interactive=True,
+                label="💬 対話型有効（Responses API使用）",
+                info="⚠️ 制限: PNG形式のみ対応 | 参照画像生成では利用不可"
+            )
+        
+        # タブ選択イベント
+        tab_ref.select(
+            disable_responses_for_ref_tab,
+            outputs=[enable_responses_api]
+        )
+        
+        tab_direct.select(
+            enable_responses_for_other_tabs,
+            outputs=[enable_responses_api]
+        )
+        
+        tab_ai.select(
+            enable_responses_for_other_tabs,
+            outputs=[enable_responses_api]
         )
     
     return app
