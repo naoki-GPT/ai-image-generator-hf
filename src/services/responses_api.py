@@ -159,14 +159,17 @@ class ResponsesAPI:
             # ツールパラメータ
             tool_params = {"type": "image_generation"}
             for key, value in kwargs.items():
-                if value is not None:
-                    # 引数名の正規化
-                    if key == "format":
-                        tool_params["response_format"] = value
-                    elif key == "output_format":
-                        tool_params["response_format"] = value
-                    else:
-                        tool_params[key] = value
+                if value is None:
+                    continue
+                if key in {"format", "output_format", "response_format"}:
+                    tool_params["response_format"] = value
+                elif key == "background":
+                    tool_params["background"] = value
+                elif key == "output_compression":
+                    tool_params["output_compression"] = value
+                # それ以外は size / quality / moderation など
+                else:
+                    tool_params[key] = value
             
             response = self.client.responses.create(
                 model=model,
@@ -228,14 +231,17 @@ class ResponsesAPI:
             # ツールパラメータ
             tool_params = {"type": "image_generation"}
             for key, value in kwargs.items():
-                if value is not None:
-                    # 引数名の正規化
-                    if key == "format":
-                        tool_params["response_format"] = value
-                    elif key == "output_format":
-                        tool_params["response_format"] = value
-                    else:
-                        tool_params[key] = value
+                if value is None:
+                    continue
+                if key in {"format", "output_format", "response_format"}:
+                    tool_params["response_format"] = value
+                elif key == "background":
+                    tool_params["background"] = value
+                elif key == "output_compression":
+                    tool_params["output_compression"] = value
+                # それ以外は size / quality / moderation など
+                else:
+                    tool_params[key] = value
             
             response = self.client.responses.create(
                 model=model,

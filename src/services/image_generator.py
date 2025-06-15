@@ -116,7 +116,7 @@ class ImageGenerator:
             image_file = BytesIO(reference_image_data)
             image_file.name = "reference.png"
             
-            # 生成パラメータの準備
+            # 生成パラメータの準備（Image Edit APIは基本パラメータのみ）
             edit_params = {
                 "model": "gpt-image-1",
                 "image": image_file,
@@ -125,19 +125,9 @@ class ImageGenerator:
                 "quality": quality
             }
             
-            # オプションパラメータの追加
-            if format != "png":
-                edit_params["response_format"] = format
-                
-            if transparent_bg and format in ["png", "webp"]:
-                edit_params["background"] = "transparent"
-            
-            # 圧縮設定（JPEG/WebPのみ有効）
-            if output_compression is not None and format in ["jpeg", "webp"]:
-                if 0 <= output_compression <= 100:
-                    edit_params["output_compression"] = output_compression
-                else:
-                    raise ValueError("output_compressionは0-100の範囲で指定してください")
+            # Image Edit APIはresponse_formatとoutput_compressionをサポートしていない
+            # PNG以外が必要な場合は後でconvertするか、images.generateにフォールバック
+            # 現在はPNGのみ対応
             
             # モデレーション設定（Image Edit APIではサポートされていない可能性があるため注意）
             # if moderation in ["auto", "low"]:
