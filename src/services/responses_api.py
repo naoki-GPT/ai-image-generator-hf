@@ -36,7 +36,7 @@ class ResponsesAPI:
             if quality != "auto":
                 tool_params["quality"] = quality
             if format != "png":
-                tool_params["output_format"] = format
+                tool_params["response_format"] = format
             if background != "auto":
                 tool_params["background"] = background
             if output_compression is not None and format in ["jpeg", "webp"]:
@@ -160,7 +160,13 @@ class ResponsesAPI:
             tool_params = {"type": "image_generation"}
             for key, value in kwargs.items():
                 if value is not None:
-                    tool_params[key] = value
+                    # 引数名の正規化
+                    if key == "format":
+                        tool_params["response_format"] = value
+                    elif key == "output_format":
+                        tool_params["response_format"] = value
+                    else:
+                        tool_params[key] = value
             
             response = self.client.responses.create(
                 model=model,
@@ -223,7 +229,13 @@ class ResponsesAPI:
             tool_params = {"type": "image_generation"}
             for key, value in kwargs.items():
                 if value is not None:
-                    tool_params[key] = value
+                    # 引数名の正規化
+                    if key == "format":
+                        tool_params["response_format"] = value
+                    elif key == "output_format":
+                        tool_params["response_format"] = value
+                    else:
+                        tool_params[key] = value
             
             response = self.client.responses.create(
                 model=model,

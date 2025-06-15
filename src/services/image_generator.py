@@ -36,7 +36,7 @@ class ImageGenerator:
             
             # オプションパラメータの追加
             if format != "png":
-                generation_params["output_format"] = format
+                generation_params["response_format"] = format
                 
             if transparent_bg and format in ["png", "webp"]:
                 generation_params["background"] = "transparent"
@@ -127,7 +127,7 @@ class ImageGenerator:
             
             # オプションパラメータの追加
             if format != "png":
-                edit_params["output_format"] = format
+                edit_params["response_format"] = format
                 
             if transparent_bg and format in ["png", "webp"]:
                 edit_params["background"] = "transparent"
