@@ -29,9 +29,23 @@ try:
         return _orig(schema, defs or {})
 
     _gcu._json_schema_to_python_type = _patched
-    print("猿パッチを適用しました")
+    print("Gradio猿パッチを適用しました")
 except Exception as e:
-    print(f"猿パッチの適用に失敗: {e}")
+    print(f"Gradio猿パッチの適用に失敗: {e}")
+
+# OpenAI proxies引数互換パッチ（古いSDK用）
+try:
+    import inspect
+    import functools
+    from openai import OpenAI
+    
+    if 'proxies' in inspect.signature(OpenAI.__init__).parameters:
+        OpenAI.__init__ = functools.partialmethod(OpenAI.__init__, proxies=None)
+        print("OpenAI proxies猿パッチを適用しました")
+    else:
+        print("OpenAI proxies引数は存在しません（新しいSDK）")
+except Exception as e:
+    print(f"OpenAI猿パッチの適用に失敗: {e}")
 
 # HuggingFace Spaces用パス設定
 BASE_DIR = Path(__file__).parent
@@ -221,13 +235,6 @@ def convert_to_yaml_prompt(text_prompt, api_key, current_size="1024x1024 (正方
         # Hugging Face Spacesの環境変数によるプロキシ設定を無効化
         for key in ("http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY"):
             os.environ.pop(key, None)
-        
-        # openai==1.51.0のバグ対策（猿パッチ）
-        try:
-            import functools
-            OpenAI.__init__ = functools.partialmethod(OpenAI.__init__, proxies=None)
-        except:
-            pass
         
         client = OpenAI(api_key=api_key)
         
