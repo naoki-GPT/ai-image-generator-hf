@@ -34,7 +34,7 @@ class ImageGenerator:
                 "n": max(1, min(n, 10))  # 1-10の範囲で制限
             }
             
-            # オプションパラメータの追加（OpenAI Image APIは'format'を使用）
+            # オプションパラメータの追加（SDK互換性考慮）
             if format != "png":
                 generation_params["format"] = format
                 
@@ -55,16 +55,27 @@ class ImageGenerator:
                 raise ValueError("moderationは'auto'または'low'で指定してください")
             
             # 参考画像がある場合もプロンプトに含めて通常生成
-            return self._generate_simple(generation_params, cost_estimate)
+            return self._generate_simple(generation_params, cost_estimate, format, output_compression)
                 
         except Exception as e:
             raise Exception(f"画像生成エラー: {str(e)}")
     
-    def _generate_simple(self, params: Dict, cost_estimate: Dict) -> Dict:
-        """シンプルな画像生成"""
+    def _generate_simple(self, params: Dict, cost_estimate: Dict, target_format: str = "png", compression: int = None) -> Dict:
+        """シンプルな画像生成（format互換性対応）"""
         start_time = time.time()
         
-        response = self.client.images.generate(**params)
+        try:
+            # 新しいSDKでformat引数を試行
+            response = self.client.images.generate(**params)
+        except TypeError as e:
+            if 'format' in str(e) or 'output_compression' in str(e):
+                # 古いSDKの場合：format関連パラメータを除去してPNGで生成
+                fallback_params = {k: v for k, v in params.items() 
+                                 if k not in ['format', 'output_compression', 'background']}
+                response = self.client.images.generate(**fallback_params)
+                # 後でPILで形式変換する（実装は後述）
+            else:
+                raise
         
         generation_time = time.time() - start_time
         
@@ -73,6 +84,11 @@ class ImageGenerator:
         for data in response.data:
             image_base64 = data.b64_json
             image_data = base64.b64decode(image_base64)
+            
+            # 形式変換が必要な場合（古いSDK対応）
+            if target_format != "png" and target_format in ["jpeg", "webp"]:
+                image_data = self._convert_image_format(image_data, target_format, compression)
+            
             images.append(image_data)
         
         # 単一画像の場合は従来の形式を保持（互換性）
@@ -304,3 +320,49 @@ class ImageGenerator:
             
         except Exception as e:
             raise Exception(f"バリエーション生成エラー: {str(e)}")
+    
+    def _convert_image_format(self, image_data: bytes, target_format: str, compression: int = None) -> bytes:
+        """PIL使用して画像形式を変換（古いSDK対応）"""
+        try:
+            from PIL import Image
+            from io import BytesIO
+            
+            # PNG画像データをPILで読み込み
+            image = Image.open(BytesIO(image_data))
+            
+            # RGBA to RGB変換（JPEG用）
+            if target_format == "jpeg" and image.mode in ("RGBA", "LA"):
+                # 白背景で合成
+                background = Image.new("RGB", image.size, (255, 255, 255))
+                if image.mode == "RGBA":
+                    background.paste(image, mask=image.split()[-1])
+                else:
+                    background.paste(image)
+                image = background
+            
+            # バイトストリームに保存
+            output = BytesIO()
+            save_kwargs = {}
+            
+            if target_format == "jpeg":
+                save_format = "JPEG"
+                if compression is not None:
+                    save_kwargs["quality"] = compression
+                else:
+                    save_kwargs["quality"] = 90  # デフォルト品質
+            elif target_format == "webp":
+                save_format = "WebP" 
+                if compression is not None:
+                    save_kwargs["quality"] = compression
+                else:
+                    save_kwargs["quality"] = 90  # デフォルト品質
+            else:
+                save_format = "PNG"
+            
+            image.save(output, format=save_format, **save_kwargs)
+            return output.getvalue()
+            
+        except Exception as e:
+            # 変換に失敗した場合は元の画像データを返す
+            print(f"画像形式変換エラー: {e}")
+            return image_data
