@@ -67,6 +67,54 @@ APP_CONFIG = {
     'default_compression': 80
 }
 
+# GPT Image 1価格設定（2025年6月最新価格）
+GPT_IMAGE_PRICING = {
+    'low': {
+        '1024x1024': 0.011,
+        '1024x1536': 0.016,
+        '1536x1024': 0.016
+    },
+    'medium': {
+        '1024x1024': 0.042,
+        '1024x1536': 0.063,
+        '1536x1024': 0.063
+    },
+    'hd': {  # high
+        '1024x1024': 0.167,
+        '1024x1536': 0.25,
+        '1536x1024': 0.25
+    }
+}
+
+def calculate_image_cost(size, quality, image_count=1):
+    """サイズと品質に基づいて正確なコストを計算"""
+    try:
+        # 品質マッピング
+        quality_map = {
+            'auto': 'medium',  # デフォルトはmedium
+            'standard': 'medium',
+            'hd': 'hd'
+        }
+        
+        mapped_quality = quality_map.get(quality, 'medium')
+        cost_per_image = GPT_IMAGE_PRICING[mapped_quality][size]
+        total_cost_usd = cost_per_image * image_count
+        total_cost_jpy = total_cost_usd * 150  # 1USD = 150円で概算
+        
+        return {
+            'cost_usd': f"{total_cost_usd:.3f}",
+            'cost_jpy': f"{total_cost_jpy:.1f}",
+            'per_image_usd': f"{cost_per_image:.3f}"
+        }
+    except Exception as e:
+        # フォールバック価格
+        fallback_cost = 0.042 * image_count
+        return {
+            'cost_usd': f"{fallback_cost:.3f}",
+            'cost_jpy': f"{fallback_cost * 150:.1f}",
+            'per_image_usd': "0.042"
+        }
+
 SIZE_MAP = {
     "1024x1024 (正方形)": "1024x1024",
     "1024x1536 (縦長)": "1024x1536", 
@@ -306,13 +354,14 @@ def create_optimized_app():
             
             # コスト情報（複数画像対応）
             image_count_info = f"x{int(image_count)}" if int(image_count) > 1 else ""
-            cost_multiplier = int(image_count)
+            cost_data = calculate_image_cost(size_value, quality, int(image_count))
             
             cost_info = f"""**生成完了** ⚡
 **時間**: {result.get('generation_time', 'N/A')}秒
 **画像数**: {result.get('image_count', 1)}枚
-**コスト**: 約${0.040 * cost_multiplier:.3f} (¥{6.0 * cost_multiplier:.1f})
-**モード**: {'AI最適化' if use_ai_mode else '直接'}"""
+**コスト**: 約${cost_data['cost_usd']} (¥{cost_data['cost_jpy']})
+**モード**: {'AI最適化' if use_ai_mode else '直接'}
+**詳細**: {size_value}, {quality}品質"""
             
             return image, "✅ 画像生成完了！", cost_info, prompt
             
@@ -420,13 +469,14 @@ def create_optimized_app():
                 print(f"[DEBUG] プロンプト直接: 従来API使用、response_idクリア")
             
             # コスト情報（複数画像対応）
-            cost_multiplier = int(image_count)
+            cost_data = calculate_image_cost(size_value, quality, int(image_count))
             cost_info = f"""**生成完了** ⚡
 **時間**: {result.get('generation_time', 'N/A')}秒
 **画像数**: {result.get('image_count', 1)}枚
-**コスト**: 約${0.040 * cost_multiplier:.3f} (¥{6.0 * cost_multiplier:.1f})
+**コスト**: 約${cost_data['cost_usd']} (¥{cost_data['cost_jpy']})
 **モード**: 直接プロンプト
-**YAML変換**: {'適用済み' if final_prompt != prompt else 'なし'}"""
+**YAML変換**: {'適用済み' if final_prompt != prompt else 'なし'}
+**詳細**: {size_value}, {quality}品質"""
             
             return image, "✅ 画像生成完了！", cost_info, final_prompt
             

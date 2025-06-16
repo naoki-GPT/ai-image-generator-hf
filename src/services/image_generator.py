@@ -22,8 +22,8 @@ class ImageGenerator:
         """画像を生成"""
         
         try:
-            # 簡易コスト見積もり
-            cost_estimate = {"cost_usd": "0.040", "cost_jpy": "6.0", "tokens": "N/A"}
+            # 実際のコスト計算をアプリ側で行うため、プレースホルダーのみ
+            cost_estimate = {"cost_usd": "計算中", "cost_jpy": "計算中", "tokens": "N/A"}
             
             # 生成パラメータの準備
             generation_params = {
