@@ -354,14 +354,14 @@ def create_optimized_app():
             
             # コスト情報（複数画像対応）
             image_count_info = f"x{int(image_count)}" if int(image_count) > 1 else ""
-            cost_data = calculate_image_cost(size_value, quality, int(image_count))
+            cost_data = calculate_image_cost(size_key, quality, int(image_count))
             
             cost_info = f"""**生成完了** ⚡
 **時間**: {result.get('generation_time', 'N/A')}秒
 **画像数**: {result.get('image_count', 1)}枚
 **コスト**: 約${cost_data['cost_usd']} (¥{cost_data['cost_jpy']})
 **モード**: {'AI最適化' if use_ai_mode else '直接'}
-**詳細**: {size_value}, {quality}品質"""
+**詳細**: {size_key}, {quality}品質"""
             
             return image, "✅ 画像生成完了！", cost_info, prompt
             
@@ -469,14 +469,14 @@ def create_optimized_app():
                 print(f"[DEBUG] プロンプト直接: 従来API使用、response_idクリア")
             
             # コスト情報（複数画像対応）
-            cost_data = calculate_image_cost(size_value, quality, int(image_count))
+            cost_data = calculate_image_cost(size_key, quality, int(image_count))
             cost_info = f"""**生成完了** ⚡
 **時間**: {result.get('generation_time', 'N/A')}秒
 **画像数**: {result.get('image_count', 1)}枚
 **コスト**: 約${cost_data['cost_usd']} (¥{cost_data['cost_jpy']})
 **モード**: 直接プロンプト
 **YAML変換**: {'適用済み' if final_prompt != prompt else 'なし'}
-**詳細**: {size_value}, {quality}品質"""
+**詳細**: {size_key}, {quality}品質"""
             
             return image, "✅ 画像生成完了！", cost_info, final_prompt
             

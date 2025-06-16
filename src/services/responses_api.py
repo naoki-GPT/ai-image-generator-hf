@@ -40,7 +40,11 @@ class ResponsesAPI:
             if partial_images is not None and stream:
                 tool_params["partial_images"] = partial_images
             
-            # 以下は未サポートのため削除：response_format, background, output_compression
+            # format指定（PNG以外の場合）
+            if format != "png":
+                tool_params["format"] = format
+            
+            # 以下は未サポートのため削除：background, output_compression
             
             # APIリクエスト
             if stream:
@@ -154,14 +158,16 @@ class ResponsesAPI:
             
             # ツールパラメータ（Responses API対応パラメータのみ）
             tool_params = {"type": "image_generation"}
-            supported_params = {"size", "quality", "moderation", "partial_images"}
+            supported_params = {"size", "quality", "moderation", "partial_images", "format"}
             
             for key, value in kwargs.items():
                 if value is None:
                     continue
                 if key in supported_params:
                     tool_params[key] = value
-                # format系、background、output_compressionは未サポートのため無視
+                elif key in ("output_format", "format") and value != "png":
+                    tool_params["format"] = value
+                # background、output_compressionは未サポートのため無視
             
             response = self.client.responses.create(
                 model=model,
@@ -222,14 +228,16 @@ class ResponsesAPI:
             
             # ツールパラメータ（Responses API対応パラメータのみ）
             tool_params = {"type": "image_generation"}
-            supported_params = {"size", "quality", "moderation", "partial_images"}
+            supported_params = {"size", "quality", "moderation", "partial_images", "format"}
             
             for key, value in kwargs.items():
                 if value is None:
                     continue
                 if key in supported_params:
                     tool_params[key] = value
-                # format系、background、output_compressionは未サポートのため無視
+                elif key in ("output_format", "format") and value != "png":
+                    tool_params["format"] = value
+                # background、output_compressionは未サポートのため無視
             
             response = self.client.responses.create(
                 model=model,
