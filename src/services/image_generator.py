@@ -34,9 +34,9 @@ class ImageGenerator:
                 "n": max(1, min(n, 10))  # 1-10の範囲で制限
             }
             
-            # オプションパラメータの追加
+            # オプションパラメータの追加（OpenAI Image APIは'format'を使用）
             if format != "png":
-                generation_params["response_format"] = format
+                generation_params["format"] = format
                 
             if transparent_bg and format in ["png", "webp"]:
                 generation_params["background"] = "transparent"

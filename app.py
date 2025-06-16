@@ -93,6 +93,9 @@ def calculate_image_cost(size, quality, image_count=1):
         quality_map = {
             'auto': 'medium',  # デフォルトはmedium
             'standard': 'medium',
+            'low': 'low',
+            'medium': 'medium', 
+            'high': 'hd',  # OpenAI docsではhigh = hd
             'hd': 'hd'
         }
         
