@@ -1165,8 +1165,8 @@ YAML_GENERATE: YouTubeサムネイル、エンタメ系チャンネル、「爆�
 
 番号を選ぶか、作りたいものを自由に入力してください！"""
             
-            # Gradio標準形式で初期メッセージを返す
-            return [["", welcome_msg]]
+            # Gradio Chatbot(type="messages") 用の初期メッセージ形式で返却
+            return [{"role": "assistant", "content": welcome_msg}]
         
         ai_restart_btn.click(
             ai_chat_restart,
